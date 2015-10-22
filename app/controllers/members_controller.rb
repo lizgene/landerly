@@ -3,7 +3,6 @@ before_action :set_member, only: [:update]
 
 
   def update
-    binding.remote_pry
     respond_to do |format|
       if @member.update(member_params)
         format.html { redirect_to thankyou_path, notice: 'Member was successfully updated.' }
@@ -27,7 +26,8 @@ before_action :set_member, only: [:update]
     params.require(:member).permit(:email, :first_name, :last_name, :phone, 
     # {"preferences"=>{"subjects"=>"[\"math\", \"science\"]", "region"=>"[1, 2]", "price"=>"[\"free\"]", "start_date"=>""}
 
-    {"preferences"=> ["subjects", "region", {"price" => []}, "start_date"]} 
+    #create a constant, loop through everything on the front-end
+    {preferences: [ {subjects: []}, {region: []}, {price: []}, {start_date: []}]} 
     )
   end
 

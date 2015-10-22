@@ -12,100 +12,129 @@
       <p>Nice that you're so proactive! We'd love to help you along.
         One of our specialists can look at your profile, give you <%= link_to "", "free personal advice" %>
         and even process a course booking. Please specify what you're searching for below.</p>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-sm-2">
-      <div class="thumbnail">
-        <img src="http://lorempixel.com/g/150/150/animals/" alt="...">
-        <div class="caption">
-          <h3>Anny</h3>
-        </div>
       </div>
     </div>
-
-    <div class="col-sm-2">
-      <div class="thumbnail">
-        <img src="http://lorempixel.com/g/150/150/fashion/" alt="...">
-        <div class="caption">
-          <h3>Doron</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-2">
-      <div class="thumbnail">
-        <img src="http://lorempixel.com/g/150/150/people/" alt="...">
-        <div class="caption">
-          <h3>Marlou</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-2">
-      <div class="thumbnail">
-        <img src="http://lorempixel.com/g/150/150/cats/" alt="...">
-        <div class="caption">
-          <h3>Midas</h3>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
     <div class="row">
-    <div class="col-sm-10">
-      <%= form_for @member, url: { controller: "members", action: "update" } do |f| %>
-
-      <h2><%= @member.first_name %>, What are you looking for?</h2>
-      <p>Be specific!</p>
-
-      <div class="row">
-        <%= f.fields_for :preferences do |p| %>
-
-            <div class="form-group form-inline clearfix">
-              <%= p.label :subjects, "Subject(s)", class: "control-label col-sm-2" %>
-              <%= p.text_field :subjects, :value => @member.preferences["subjects"], class: "form-control col-sm-10" %>
-            </div>
-
-            <div class="form-group form-inline clearfix">
-              <%= p.label :region, "Region(s)", class: "control-label  col-sm-2" %>
-              <%= p.text_field :region, :value => @member.preferences["region"], class: "form-control col-sm-10" %>
-            </div>
-
-            <div class="form-group form-inline clearfix">
-
-
-              <%= p.label :price, "Price", class: "control-label col-sm-2" %>
-
-              <%= label_tag do %>
-                <input name="member[preferences][price][]" type="checkbox" value="free" <% if @member.prefers_price?('free') %>checked<% end %> >
-                Free
-              <% end %>
-
-              <%= label_tag do %>
-              <input name="member[preferences][price][]" type="checkbox" value="0-500" <% if @member.prefers_price?('0-500') %>checked<% end %>  >
-                0-500
-              <% end %>
-
-              <%= label_tag do %>
-                <%= check_box_tag  'member[preferences][price][]', '500-1000', @member.prefers_price?('500-1000') %>
-                500-1000
-              <% end %>
-
-<!--               <input name="member[preferences][price][]" type="checkbox" value="free">FREE
- -->            </div>
-
-            <div class="form-group form-inline clearfix">
-              <%= p.label :start_date, "Starting Date", class: "control-label col-sm-2" %>
-              <%= p.text_field :start_date, :value => @member.preferences["start_date"], class: "form-control col-sm-10" %>
-            </div>
-
-        <% end %>
-        
+      <div class="col-sm-2">
+        <div class="thumbnail">
+          <img src="http://lorempixel.com/g/150/150/animals/" alt="...">
+          <div class="caption">
+            <h3>Anny</h3>
+          </div>
+        </div>
       </div>
+
+      <div class="col-sm-2">
+        <div class="thumbnail">
+          <img src="http://lorempixel.com/g/150/150/fashion/" alt="...">
+          <div class="caption">
+            <h3>Doron</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="thumbnail">
+          <img src="http://lorempixel.com/g/150/150/people/" alt="...">
+          <div class="caption">
+            <h3>Marlou</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="thumbnail">
+          <img src="http://lorempixel.com/g/150/150/cats/" alt="...">
+          <div class="caption">
+            <h3>Midas</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-10">
+        <%= form_for @member, url: { controller: "members", action: "update" } do |f| %>
+
+        <h2><%= @member.first_name %>, What are you looking for?</h2>
+        <p>Be specific!</p>
+
+        <div class="row">
+          <%= f.fields_for :preferences do |p| %>
+
+          <!-- Form group checkboxes for SUBJECT -->
+          <div class="form-group form-inline clearfix">
+            <%= p.label :subjects, "Subject(s)", class: "control-label col-sm-2" %>          
+            
+            <%= label_tag do %>
+            <input name="member[preferences][subjects][]" type="checkbox" value="math" <% if @member.prefers_subjects?('math') %>checked<% end %> >
+            Math
+            <% end %>
+
+            <%= label_tag do %>
+            <input name="member[preferences][subjects][]" type="checkbox" value="science" <% if @member.prefers_subjects?('science') %>checked<% end %>  >
+            Science
+            <% end %>
+
+            <%= label_tag do %>
+            <%= check_box_tag  'member[preferences][subjects][]', 'art', @member.prefers_subjects?('art') %>
+            Art
+            <% end %>
+
+          </div>
+
+          <!-- Form group checkboxes for REGION -->
+          <div class="form-group form-inline clearfix">
+            <%= p.label :region, "Region(s)", class: "control-label  col-sm-2" %>
+            
+            <%= label_tag do %>
+            <input name="member[preferences][region][]" type="checkbox" value="1" <% if @member.prefers_region?(1) %>checked<% end %> >
+            Amsterdam
+            <% end %>
+
+            <%= label_tag do %>
+            <input name="member[preferences][region][]" type="checkbox" value="2" <% if @member.prefers_region?(2) %>checked<% end %>  >
+            Rotterdam
+            <% end %>
+
+            <%= label_tag do %>
+            <%= check_box_tag  'member[preferences][region][]', '3', @member.prefers_region?(3) %>
+            Indiana
+            <% end %>
+          </div>
+
+          <!-- Form group checkboxes for PRICE -->
+          <div class="form-group form-inline clearfix">
+          
+            <%= p.label :price, "Price", class: "control-label col-sm-2" %>
+            <%= label_tag do %>
+            <input name="member[preferences][price][]" type="checkbox" value="free" <% if @member.prefers_price?('free') %>checked<% end %> >
+            Free
+            <% end %>
+
+            <%= label_tag do %>
+            <input name="member[preferences][price][]" type="checkbox" value="0-500" <% if @member.prefers_price?('0-500') %>checked<% end %>  >
+            0-500
+            <% end %>
+
+            <%= label_tag do %>
+            <%= check_box_tag  'member[preferences][price][]', '500-1000', @member.prefers_price?('500-1000') %>
+            500-1000
+            <% end %>
+
+          </div>
+
+          <div class="form-group form-inline clearfix">
+            <%= p.label :start_date, "Starting Date", class: "control-label col-sm-2" %>
+            <%= p.text_field :start_date, :value => @member.preferences["start_date"], class: "form-control col-sm-10" %>
+          </div>
+
+          <% end %>
+
+        </div>
 
         <!-- use this just to send an email to support -->
         <div class="form-group form-inline row">
@@ -115,27 +144,27 @@
 
         <h2>And now what?</h2>
         <p>We're going to look at your specifications, do a little research and then contact you either via phone or email.</p>
-            
+
         <div class="form-group form-inline clearfix">
           <%= f.label :phone, class: "control-label" %>
           <%= f.text_field :phone, class: "form-control" %>
         </div>
 
-         <div class="form-group form-inline">
+        <div class="form-group form-inline">
           <!-- use this for internal support - don't save in database -->
 
           <%= label_tag :requested_phonecall do %>
-            <%= check_box_tag :requested_phonecall %>
-            Yes, I'd like to receive a phonecall
+          <%= check_box_tag :requested_phonecall %>
+          Yes, I'd like to receive a phonecall
           <% end %>
         </div>
-          
+
 
         <%= f.submit "Help me out", class: "btn btn-success" %>
-      <% end %>
+        <% end %>
 
-      
+
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>
