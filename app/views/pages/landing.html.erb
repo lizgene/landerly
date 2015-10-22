@@ -57,38 +57,63 @@
 
     <div class="row">
     <div class="col-sm-10">
-      <%= form_for @member do |f| %>
+      <%= form_for @member, url: { controller: "members", action: "update" } do |f| %>
 
       <h2><%= @member.first_name %>, What are you looking for?</h2>
       <p>Be specific!</p>
 
+      <div class="row">
         <%= f.fields_for :preferences do |p| %>
 
-            <div class="form-group form-inline">
-              <%= p.label :subjects, "Subject(s)", class: "control-label" %>
-              <%= p.text_field :subjects, :value => @member.preferences["subjects"], class: "form-control" %>
+            <div class="form-group form-inline clearfix">
+              <%= p.label :subjects, "Subject(s)", class: "control-label col-sm-2" %>
+              <%= p.text_field :subjects, :value => @member.preferences["subjects"], class: "form-control col-sm-10" %>
             </div>
 
-            <%= p.text_field :region, :value => @member.preferences["region"], class: "form-control" %>
+            <div class="form-group form-inline clearfix">
+              <%= p.label :region, "Region(s)", class: "control-label  col-sm-2" %>
+              <%= p.text_field :region, :value => @member.preferences["region"], class: "form-control col-sm-10" %>
+            </div>
 
-            <%= p.text_field :region, :value => @member.preferences["region"], class: "form-control" %>
+            <div class="form-group form-inline clearfix">
+              <%= p.label :price, "Price", class: "control-label col-sm-2" %>
+              <%= p.text_field :price, :value => @member.preferences["price"], class: "form-control col-sm-10" %>
+            </div>
 
+            <div class="form-group form-inline clearfix">
+              <%= p.label :start_date, "Starting Date", class: "control-label col-sm-2" %>
+              <%= p.text_field :start_date, :value => @member.preferences["start_date"], class: "form-control col-sm-10" %>
+            </div>
 
         <% end %>
         
+      </div>
+
         <!-- use this just to send an email to support -->
-        <%= text_area_tag :comments %>
+        <div class="form-group form-inline row">
+          <%= label_tag :comments, "Comments", class: "control-label col-sm-2" %>
+          <%= text_area_tag :comments, nil, cols: "40", rows: "8", class: "form-control col-sm-10" %>
+        </div>
 
         <h2>And now what?</h2>
-        We're going to look at your specifications, do a little research and then contact you either via phone or email.
+        <p>We're going to look at your specifications, do a little research and then contact you either via phone or email.</p>
+            
+        <div class="form-group form-inline clearfix">
+          <%= f.label :phone, class: "control-label" %>
+          <%= f.text_field :phone, class: "form-control" %>
+        </div>
 
+         <div class="form-group form-inline">
+          <!-- use this for internal support - don't save in database -->
 
-        <%= f.text_field :phone, class: "form-control" %>
+          <%= label_tag :requested_phonecall do %>
+            <%= check_box_tag :requested_phonecall %>
+            Yes, I'd like to receive a phonecall
+          <% end %>
+        </div>
+          
 
-        <!-- use this for internal support - don't save in database -->
-        <%= check_box_tag :requested_phonecall, class: "form-control" %>
-
-
+        <%= f.submit "Help me out", class: "btn btn-success" %>
       <% end %>
 
       
