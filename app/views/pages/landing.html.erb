@@ -69,20 +69,7 @@
           <div class="form-group form-inline clearfix">
             <%= p.label :subjects, "Subject(s)", class: "control-label col-sm-2" %>          
             
-            <%= label_tag do %>
-            <input name="member[preferences][subjects][]" type="checkbox" value="math" <% if @member.prefers_subjects?('math') %>checked<% end %> >
-            Math
-            <% end %>
 
-            <%= label_tag do %>
-            <input name="member[preferences][subjects][]" type="checkbox" value="science" <% if @member.prefers_subjects?('science') %>checked<% end %>  >
-            Science
-            <% end %>
-
-            <%= label_tag do %>
-            <%= check_box_tag  'member[preferences][subjects][]', 'art', @member.prefers_subjects?('art') %>
-            Art
-            <% end %>
 
           </div>
 
