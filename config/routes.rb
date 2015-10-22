@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # Pages
   get '/landing/:id' => 'pages#landing', as: :landing
+  get '/thankyou' => 'pages#thankyou', as: :thankyou
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

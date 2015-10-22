@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def landing
-    return redirect_to root_path unless params[:id] && @member=Member.find_by_id(params[:id])
+    @member = Member.find_by_id(params[:id])
+    return redirect_to root_path if @member.nil?
   end
 end
