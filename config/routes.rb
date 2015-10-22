@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root 'pages#index'
 
+  resources :members
+
+  # Pages
+  get '/landing/:id' => 'pages#landing', as: :landing
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
