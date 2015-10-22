@@ -76,9 +76,27 @@
             </div>
 
             <div class="form-group form-inline clearfix">
+
+
               <%= p.label :price, "Price", class: "control-label col-sm-2" %>
-              <%= p.text_field :price, :value => @member.preferences["price"], class: "form-control col-sm-10" %>
-            </div>
+
+              <%= label_tag do %>
+                <input name="member[preferences][price][]" type="checkbox" value="free" <% if @member.prefers_price?('free') %>checked<% end %> >
+                Free
+              <% end %>
+
+              <%= label_tag do %>
+              <input name="member[preferences][price][]" type="checkbox" value="0-500" <% if @member.prefers_price?('0-500') %>checked<% end %>  >
+                0-500
+              <% end %>
+
+              <%= label_tag do %>
+                <%= check_box_tag  'member[preferences][price][]', '500-1000', @member.prefers_price?('500-1000') %>
+                500-1000
+              <% end %>
+
+<!--               <input name="member[preferences][price][]" type="checkbox" value="free">FREE
+ -->            </div>
 
             <div class="form-group form-inline clearfix">
               <%= p.label :start_date, "Starting Date", class: "control-label col-sm-2" %>
