@@ -3,13 +3,13 @@ before_action :set_member, only: [:update]
 
 
   def update
-    logger.info(member_params)
-
     respond_to do |format|
       if @member.update(member_params)
         format.html { redirect_to thankyou_path, notice: 'Member was successfully updated.' }
+      
       else
-        format.html { redirect_to landing_path(id: @member.id), notice: "Something went wrong. Please try again." }
+        @error = @member.errors.full_messages.to_sentence
+        format.html { redirect_to landing_path(id: @member.id), alert: "Something went wrong. #{@error}" }
       end
     end
   end
