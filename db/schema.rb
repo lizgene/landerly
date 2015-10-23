@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022124203) do
+ActiveRecord::Schema.define(version: 20151023101515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,5 +25,27 @@ ActiveRecord::Schema.define(version: 20151022124203) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "subjects", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trainings", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trainings_subjects", id: false, force: true do |t|
+    t.integer "training_id"
+    t.integer "subject_id"
+  end
+
+  add_index "trainings_subjects", ["subject_id"], name: "index_trainings_subjects_on_subject_id", using: :btree
+  add_index "trainings_subjects", ["training_id"], name: "index_trainings_subjects_on_training_id", using: :btree
 
 end
