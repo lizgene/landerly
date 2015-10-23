@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023101515) do
+ActiveRecord::Schema.define(version: 20151023115900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20151023101515) do
     t.string   "last_name"
     t.string   "phone"
     t.json     "preferences"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regions", force: true do |t|
+    t.string   "name"
+    t.decimal  "lat"
+    t.decimal  "lng"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,6 +47,14 @@ ActiveRecord::Schema.define(version: 20151023101515) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "trainings_regions", id: false, force: true do |t|
+    t.integer "training_id"
+    t.integer "region_id"
+  end
+
+  add_index "trainings_regions", ["region_id"], name: "index_trainings_regions_on_region_id", using: :btree
+  add_index "trainings_regions", ["training_id"], name: "index_trainings_regions_on_training_id", using: :btree
 
   create_table "trainings_subjects", id: false, force: true do |t|
     t.integer "training_id"

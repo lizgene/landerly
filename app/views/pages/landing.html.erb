@@ -67,22 +67,14 @@
 
           <!-- Form group checkboxes for SUBJECT -->
           <div class="form-group form-inline clearfix">
-            <%= p.label :subject, "Subject(s)", class: "control-label col-sm-2" %>          
-            <%= label_tag do %>
-            <input name="member[preferences][subject][]" type="checkbox" value="art" <% if @member.subject.include?("art") %>checked<% end %> >
-            Art
-            <% end %>
+            <%= p.label :subject, "Subject(s)", class: "control-label col-sm-2" %>      
 
-            <%= label_tag do %>
-            <input name="member[preferences][subject][]" type="checkbox" value="science" <% if @member.subject.include?("science") %>checked<% end %>  >
-            Science
+            <% @subjects.each do |subject| %>
+              <%= label_tag do %>
+              <input name="member[preferences][subject][]" type="checkbox" value="<%= subject.name %>" <% if @member.subject.include?(subject.name) %>checked<% end %> >
+              Art
+              <% end %>
             <% end %>
-
-            <%= label_tag do %>
-            <%= check_box_tag  'member[preferences][subject][]', 'math', @member.subject.include?("math") %>
-            Math
-            <% end %>
-
 
           </div>
 
@@ -101,7 +93,7 @@
             <% end %>
 
             <%= label_tag do %>
-            <input name="member[preferences][region][]" type="checkbox" value="500-1000" <% if @member.price.include?('500-1000') %>checked<% end %>  >
+            <input name="member[preferences][region][]" type="checkbox" value="3" <% if @member.region.include?('3') %>checked<% end %>  >
             Indiana
             <% end %>
           </div>

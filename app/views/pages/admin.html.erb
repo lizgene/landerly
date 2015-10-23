@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+
+      <!-- note this is just for demo purposes -->
+      <%= link_to "Back to landing page", landing_path(Member.last), class: "btn btn-primary" %>
+
+      <h1>Admin</h1>
+
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Subject(s)</th>
+          <th>Region(s)</th>
+          <th>Budget</th>
+          <th>Start Date(s)</th>
+        </tr>
+
+        <% @members.each do |member| %>
+          <tr>
+            <td><%= member.id %></td>
+            <td><%= member.full_name %></td>
+            <td><%= member.email %></td>
+            <td><%= member.subject.join(", ") %></td>
+            <td><%= member.region.join(", ") %></td>
+            <td><%= member.price.join(", ") %></td>
+            <td><%= member.start_date.join(", ") %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+</div>
