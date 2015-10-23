@@ -16,6 +16,10 @@ class Member < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def region_names 
+    region.map { |region_id| Region.find_by_id(region_id).try(:name) }.compact
+  end
+
 
   # using store_accessor is a much better way to have these getter/setter methods
   # - but this is fun to do if it ever makes sense :)

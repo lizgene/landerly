@@ -72,7 +72,7 @@
             <% @subjects.each do |subject| %>
               <%= label_tag do %>
               <input name="member[preferences][subject][]" type="checkbox" value="<%= subject.name %>" <% if @member.subject.include?(subject.name) %>checked<% end %> >
-              Art
+              <%= subject.name.capitalize %>
               <% end %>
             <% end %>
 
@@ -81,21 +81,14 @@
           <!-- Form group checkboxes for REGION -->
           <div class="form-group form-inline clearfix">
             <%= p.label :region, "Region(s)", class: "control-label  col-sm-2" %>
+
+            <% @regions.each do |region| %>
+              <%= label_tag do %>
+                <input name="member[preferences][region][]" type="checkbox" value="<%= region.id %>" <% if @member.region.include?("#{region.id}") %>checked<% end %> >
+                <%= region.name.capitalize %>
+              <% end %>
+            <% end %>
             
-            <%= label_tag do %>
-            <input name="member[preferences][region][]" type="checkbox" value="1" <% if @member.region.include?("1") %>checked<% end %> >
-            Amsterdam
-            <% end %>
-
-            <%= label_tag do %>
-            <input name="member[preferences][region][]" type="checkbox" value="2" <% if @member.region.include?("2") %>checked<% end %>  >
-            Rotterdam
-            <% end %>
-
-            <%= label_tag do %>
-            <input name="member[preferences][region][]" type="checkbox" value="3" <% if @member.region.include?('3') %>checked<% end %>  >
-            Indiana
-            <% end %>
           </div>
 
           <!-- Form group checkboxes for PRICE -->

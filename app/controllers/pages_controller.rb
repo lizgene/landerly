@@ -10,6 +10,7 @@ class PagesController < ApplicationController
     @member = Member.find_by_id(params[:id])
 
     @subjects = Subject.all
+    @regions = Region.all
 
     return redirect_to root_path if @member.nil?
   end
