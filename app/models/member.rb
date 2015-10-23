@@ -1,5 +1,5 @@
 class Member < ActiveRecord::Base
-  before_create :initialize_preferences
+  before_validation :initialize_preferences, on: :create
   
   store_accessor :preferences, ["subject", "region", "price", "start_date"]
   
@@ -17,17 +17,19 @@ class Member < ActiveRecord::Base
   end
 
 
+  # using store_accessor is a much better way to have these getter/setter methods
+  # - but this is fun to do if it ever makes sense :)
   #metaprogramming madness!!
   #define methods to easily check to see if a user has a given preference in their json object
-  PREFERENCES.each do |preference|
-    define_method("prefers_#{preference}?") do |preference_type|
+  # PREFERENCES.each do |preference|
+  #   define_method("prefers_#{preference}?") do |preference_type|
 
-      if preferences["#{preference}"] && preferences["#{preference}"].include?("#{preference_type}")
-        return true
-      else
-        return false
-      end
-    end
-  end
+  #     if preferences["#{preference}"] && preferences["#{preference}"].include?("#{preference_type}")
+  #       return true
+  #     else
+  #       return false
+  #     end
+  #   end
+  # end
 
 end

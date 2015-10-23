@@ -9,6 +9,12 @@ RSpec.describe Member, type: :model do
   it "fails validation if email is not present" do  
     expect { FactoryGirl.create(:member, email: nil) }.to raise_error(ActiveRecord::RecordInvalid)
   end
+
+  it "initializes member preferences on create" do
+    member = FactoryGirl.create(:member)
+
+    expect(member.preferences).to_not be_nil
+  end
   
 
 end
