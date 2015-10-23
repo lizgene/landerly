@@ -129,7 +129,25 @@
 
           <div class="form-group form-inline clearfix">
             <%= p.label :start_date, "Starting Date", class: "control-label col-sm-2" %>
-            <%= p.text_field :start_date, :value => @member.preferences["start_date"], class: "form-control col-sm-10" %>
+
+
+            <%= label_tag do %>
+            <input name="member[preferences][start_date][]" type="checkbox" value="2015-11-1"<% if @member.start_date.include?('2015-11-1') %>checked<% end %> >
+
+              November 2015
+            <% end %>
+
+            <%= label_tag do %>
+            <input name="member[preferences][start_date][]" type="checkbox" value="2015-12-1"<% if @member.start_date.include?('2015-12-1') %>checked<% end %> >
+
+              December 2015
+            <% end %>
+
+            <%= label_tag do %>
+            <input name="member[preferences][start_date][]" type="checkbox" value="2016-1-1"<% if @member.start_date.include?('2016-1-1') %>checked<% end %> >
+
+              January 2016
+            <% end %>
           </div>
 
           <% end %>
