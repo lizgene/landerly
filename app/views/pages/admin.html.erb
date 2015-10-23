@@ -23,10 +23,10 @@
             <td><%= member.id %></td>
             <td><%= member.full_name %></td>
             <td><%= member.email %></td>
-            <td><%= member.subject.join(", ") %></td>
-            <td><%= member.region_names.join(", ") %></td>
-            <td><%= member.price.join(", ") %></td>
-            <td><%= member.start_date.join(", ") %></td>
+            <td><%= member.subject.join(", ") rescue "None selected" %></td>
+            <td><%= member.region_names.join(", ") rescue "None selected" %></td>
+            <td><%= member.price.join(", ") rescue "None selected" %></td>
+            <td><%= member.start_date.join(", ") rescue "None selected" %></td>
           </tr>
         <% end %>
       </table>
