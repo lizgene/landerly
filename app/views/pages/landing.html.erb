@@ -67,8 +67,21 @@
 
           <!-- Form group checkboxes for SUBJECT -->
           <div class="form-group form-inline clearfix">
-            <%= p.label :subjects, "Subject(s)", class: "control-label col-sm-2" %>          
-            
+            <%= p.label :subject, "Subject(s)", class: "control-label col-sm-2" %>          
+            <%= label_tag do %>
+            <input name="member[preferences][subject][]" type="checkbox" value="art" <% if @member.subject.include?("art") %>checked<% end %> >
+            Art
+            <% end %>
+
+            <%= label_tag do %>
+            <input name="member[preferences][subject][]" type="checkbox" value="science" <% if @member.subject.include?("science") %>checked<% end %>  >
+            Science
+            <% end %>
+
+            <%= label_tag do %>
+            <%= check_box_tag  'member[preferences][subject][]', 'math', @member.subject.include?("math") %>
+            Math
+            <% end %>
 
 
           </div>
@@ -78,17 +91,17 @@
             <%= p.label :region, "Region(s)", class: "control-label  col-sm-2" %>
             
             <%= label_tag do %>
-            <input name="member[preferences][region][]" type="checkbox" value="1" <% if @member.prefers_region?(1) %>checked<% end %> >
+            <input name="member[preferences][region][]" type="checkbox" value="1" <% if @member.region.include?("1") %>checked<% end %> >
             Amsterdam
             <% end %>
 
             <%= label_tag do %>
-            <input name="member[preferences][region][]" type="checkbox" value="2" <% if @member.prefers_region?(2) %>checked<% end %>  >
+            <input name="member[preferences][region][]" type="checkbox" value="2" <% if @member.region.include?("2") %>checked<% end %>  >
             Rotterdam
             <% end %>
 
             <%= label_tag do %>
-            <%= check_box_tag  'member[preferences][region][]', '3', @member.prefers_region?(3) %>
+            <input name="member[preferences][region][]" type="checkbox" value="500-1000" <% if @member.price.include?('500-1000') %>checked<% end %>  >
             Indiana
             <% end %>
           </div>
@@ -98,17 +111,17 @@
           
             <%= p.label :price, "Price", class: "control-label col-sm-2" %>
             <%= label_tag do %>
-            <input name="member[preferences][price][]" type="checkbox" value="free" <% if @member.prefers_price?('free') %>checked<% end %> >
+            <input name="member[preferences][price][]" type="checkbox" value="free" <% if @member.price.include?('free') %>checked<% end %> >
             Free
             <% end %>
 
             <%= label_tag do %>
-            <input name="member[preferences][price][]" type="checkbox" value="0-500" <% if @member.prefers_price?('0-500') %>checked<% end %>  >
+            <input name="member[preferences][price][]" type="checkbox" value="0-500" <% if @member.price.include?('0-500') %>checked<% end %>  >
             0-500
             <% end %>
 
             <%= label_tag do %>
-            <%= check_box_tag  'member[preferences][price][]', '500-1000', @member.prefers_price?('500-1000') %>
+            <input name="member[preferences][price][]" type="checkbox" value="500-1000" <% if @member.price.include?('500-1000') %>checked<% end %>  >
             500-1000
             <% end %>
 

@@ -1,7 +1,16 @@
 class Member < ActiveRecord::Base
+  before_create :initialize_preferences
+  
+  store_accessor :preferences, ["subject", "region", "price", "start_date"]
+  
   validates :email, presence: true
 
-  PREFERENCES = ["subjects", "region", "start_date", "price"]
+  #set list of preferences to be stored
+  PREFERENCES = ["subject", "region", "price", "start_date"]
+
+  def initialize_preferences 
+    self.preferences = Hash[ PREFERENCES.map { |preference| [preference, []] }]
+  end
 
   def full_name
     "#{first_name} #{last_name}"
